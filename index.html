@@ -229,6 +229,18 @@ alert("Объявление добавлено");
 }
 
 </script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
+<script>
+const supabaseUrl = 'https://vnkipuhkpwcdjjorrpef.supabase.co';
+const supabaseKey = 'sb_publishable_aFO8c5S7Lt3L2R1veNSJaQ_RYGsPQID';
+
+const supabase = window.supabase.createClient(
+    supabaseUrl,
+    supabaseKey
+);
+
+console.log('Supabase connected');
+</script>
 </body>
 </html>
