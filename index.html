@@ -204,13 +204,30 @@ function showForm(){
 document.getElementById("form").style.display="block";
 }
 
-function saveListing(){
+async function saveListing(){
 
 let title=document.getElementById("title").value;
 let price=document.getElementById("price").value;
+let description=document.getElementById("description").value;
 
 if(title===""){
 alert("Введите название");
+return;
+}
+
+const { data, error } = await supabaseClient
+.from('listings')
+.insert([
+{
+title:title,
+description:description,
+price:price
+}
+]);
+
+if(error){
+console.error(error);
+alert("Ошибка сохранения");
 return;
 }
 
@@ -219,12 +236,13 @@ let listings=document.getElementById("listings");
 let card=document.createElement("div");
 card.className="card";
 
-card.innerHTML=
-"<h3>"+title+"</h3><p>Цена: "+price+"</p>";
+card.innerHTML =
+"<h3>"+title+"</h3><p>Цена: "+price+"</p><p>"+description+"</p>";
 
 listings.prepend(card);
 
-alert("Объявление добавлено");
+alert("Объявление сохранено");
+}
 
 }
 
@@ -235,7 +253,7 @@ alert("Объявление добавлено");
 const supabaseUrl = 'https://vnkipuhkpwcdjjorrpef.supabase.co';
 const supabaseKey = 'sb_publishable_aFO8c5S7Lt3L2R1veNSJaQ_RYGsPQID';
 
-const supabase = window.supabase.createClient(
+const supabaseClient = window.supabase.createClient(
     supabaseUrl,
     supabaseKey
 );
