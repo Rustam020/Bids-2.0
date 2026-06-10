@@ -1,15 +1,234 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
-<title>BIDS.AZ</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BIDS.AZ Marketplace</title>
+
+<style>
+body{
+font-family:Arial,sans-serif;
+margin:0;
+padding:0;
+background:#f5f7fa;
+}
+
+header{
+background:#0d3b66;
+color:white;
+padding:20px;
+text-align:center;
+}
+
+header h1{
+margin:0;
+}
+
+nav{
+background:white;
+padding:15px;
+text-align:center;
+border-bottom:1px solid #ddd;
+}
+
+nav a{
+margin:0 15px;
+text-decoration:none;
+color:#0d3b66;
+font-weight:bold;
+}
+
+.hero{
+padding:40px;
+text-align:center;
+background:white;
+}
+
+.hero button{
+padding:12px 20px;
+font-size:16px;
+cursor:pointer;
+background:#0d3b66;
+color:white;
+border:none;
+border-radius:6px;
+}
+
+.categories{
+padding:30px;
+}
+
+.category-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:15px;
+}
+
+.category{
+background:white;
+padding:20px;
+border-radius:8px;
+box-shadow:0 1px 5px rgba(0,0,0,.1);
+}
+
+.listings{
+padding:30px;
+}
+
+.card{
+background:white;
+padding:15px;
+margin-bottom:15px;
+border-radius:8px;
+box-shadow:0 1px 5px rgba(0,0,0,.1);
+}
+
+#form{
+display:none;
+background:white;
+padding:20px;
+margin:20px;
+border-radius:8px;
+box-shadow:0 1px 5px rgba(0,0,0,.2);
+}
+
+input, textarea{
+width:100%;
+padding:10px;
+margin-top:5px;
+margin-bottom:15px;
+box-sizing:border-box;
+}
+
+.save-btn{
+background:green;
+color:white;
+border:none;
+padding:10px 15px;
+cursor:pointer;
+}
+
+footer{
+text-align:center;
+padding:20px;
+background:#0d3b66;
+color:white;
+margin-top:30px;
+}
+</style>
+
 </head>
 <body>
 
+<header>
 <h1>BIDS.AZ</h1>
+<p>Buy • Sell • Invest</p>
+</header>
 
-<p>Маркетплейс бизнеса и инвестиций</p>
+<nav>
+<a href="#">Продажа бизнеса</a>
+<a href="#">Инвесторы</a>
+<a href="#">Стартапы</a>
+<a href="#">Контакты</a>
+</nav>
 
-<button>Разместить объявление</button>
+<section class="hero">
+<h2>Маркетплейс бизнеса и инвестиций</h2>
+<p>Покупайте, продавайте бизнес и находите инвесторов.</p>
+
+<button onclick="showForm()">Разместить объявление</button>
+</section>
+
+<div id="form">
+
+<h3>Новое объявление</h3>
+
+<label>Название бизнеса</label>
+<input id="title" type="text">
+
+<label>Цена</label>
+<input id="price" type="text">
+
+<label>Описание</label>
+<textarea id="description"></textarea>
+
+<button class="save-btn" onclick="saveListing()">Сохранить</button>
+
+</div>
+
+<section class="categories">
+
+<h2>Категории</h2>
+
+<div class="category-grid">
+
+<div class="category">Продажа бизнеса</div>
+
+<div class="category">Поиск инвестора</div>
+
+<div class="category">Стартапы</div>
+
+<div class="category">Франшизы</div>
+
+</div>
+
+</section>
+
+<section class="listings">
+
+<h2>Последние объявления</h2>
+
+<div id="listings">
+
+<div class="card">
+<h3>Кафе в Баку</h3>
+<p>Цена: 120 000 AZN</p>
+</div>
+
+<div class="card">
+<h3>IT стартап ищет инвестора</h3>
+<p>Требуется: 50 000 AZN</p>
+</div>
+
+</div>
+
+</section>
+
+<footer>
+BIDS.AZ Marketplace 2.0
+</footer>
+
+<script>
+
+function showForm(){
+document.getElementById("form").style.display="block";
+}
+
+function saveListing(){
+
+let title=document.getElementById("title").value;
+let price=document.getElementById("price").value;
+
+if(title===""){
+alert("Введите название");
+return;
+}
+
+let listings=document.getElementById("listings");
+
+let card=document.createElement("div");
+card.className="card";
+
+card.innerHTML=
+"<h3>"+title+"</h3><p>Цена: "+price+"</p>";
+
+listings.prepend(card);
+
+alert("Объявление добавлено");
+
+}
+
+</script>
 
 </body>
 </html>
