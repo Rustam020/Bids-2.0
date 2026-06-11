@@ -169,6 +169,11 @@ supabaseKey
 function showForm(){
 document.getElementById("form").style.display="block";
 }
+document.getElementById("registerBtn").onclick = function(){
+
+document.getElementById("registerForm").style.display = "block";
+
+};
 async function loadListings(){
 const { data, error } = await supabaseClient
 .from('listings')
