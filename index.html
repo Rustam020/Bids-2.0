@@ -105,6 +105,7 @@ margin-top:30px;
 <div style="position:absolute;top:20px;right:30px;">
 <a href="#" id="loginBtn" style="color:white;margin-right:15px;">Вход</a>
 <a href="#" id="registerBtn" style="color:white;">Регистрация</a>
+<a href="#" id="logoutBtn" style="color:white;margin-left:15px;display:none;">Выход</a>
 </div>
 </header>
 <nav>
@@ -236,8 +237,21 @@ return;
 }
 
 alert("Вход выполнен успешно.");
-
+document.getElementById("loginBtn").style.display = "none";
+document.getElementById("registerBtn").style.display = "none";
+document.getElementById("logoutBtn").style.display = "inline";
 }
+  document.getElementById("logoutBtn").onclick = async function(){
+
+    await supabaseClient.auth.signOut();
+
+    document.getElementById("loginBtn").style.display = "inline";
+    document.getElementById("registerBtn").style.display = "inline";
+    document.getElementById("logoutBtn").style.display = "none";
+
+    alert("Вы вышли из аккаунта.");
+
+};
 async function loadListings(){
 const { data, error } = await supabaseClient
 .from('listings')
