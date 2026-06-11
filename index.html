@@ -167,8 +167,16 @@ const supabaseClient=window.supabase.createClient(
 supabaseUrl,
 supabaseKey
 );
-function showForm(){
-document.getElementById("form").style.display="block";
+async function showForm(){
+
+const { data:{ session } } = await supabaseClient.auth.getSession();
+
+if(!session){
+alert("Для размещения объявления необходимо войти в аккаунт.");
+return;
+    }
+
+    document.getElementById("form").style.display = "block";
 }
 document.getElementById("registerBtn").onclick = function(){
 document.querySelector("#registerForm h3").innerText = "Регистрация";
