@@ -366,6 +366,7 @@ await supabaseClient.storage
 .from("listing-images")
 .upload(fileName, imageFile);
 if(uploadError){
+  console.log(uploadError);
 alert(uploadError.message);
 return;
 }
