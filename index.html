@@ -283,7 +283,15 @@ document.getElementById("cabinet").style.display = "none";
 
     document.getElementById("cabinet").style.display = "block";
 document.getElementById("form").style.display = "none";
+                loadMyListings();
 };
+            async function loadMyListings(){
+
+const listings = document.getElementById("myListings");
+
+listings.innerHTML = "<p>Загрузка...</p>";
+
+}
 async function loadListings(){
 const { data, error } = await supabaseClient
 .from('listings')
