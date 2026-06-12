@@ -155,6 +155,20 @@ margin-top:30px;
 </div>
 </section>
 <section class="listings">
+  <input
+id="searchInput"
+type="text"
+placeholder="🔍 Поиск бизнеса..."
+onkeyup="loadListings()"
+style="
+width:100%;
+padding:12px;
+margin-bottom:20px;
+border:1px solid #ddd;
+border-radius:8px;
+font-size:16px;
+box-sizing:border-box;
+">
 <h2>Последние объявления</h2>
 <div id="listings">
 </div>
@@ -278,7 +292,9 @@ listings.innerHTML = "<p>Загрузка...</p>";
 
 }
 async function loadListings(){
-const { data, error } = await supabaseClient
+let search =
+document.getElementById("searchInput")?.value?.toLowerCase() || "";
+  const { data, error } = await supabaseClient
 .from('listings')
 .select('*')
 .order('id',{ascending:false});
@@ -289,6 +305,13 @@ return;
 let listings=document.getElementById("listings");
 listings.innerHTML="";
 data.forEach(item=>{
+  if(
+search &&
+!(item.title || "").toLowerCase().includes(search) &&
+!(item.description || "").toLowerCase().includes(search)
+){
+return;
+}
 let card=document.createElement("div");
 card.className="card";
 card.innerHTML =
