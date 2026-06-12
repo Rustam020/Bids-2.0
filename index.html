@@ -365,6 +365,7 @@ const { error: uploadError } =
 await supabaseClient.storage
 .from("listing-images")
 .upload(fileName, imageFile);
+  alert("UPLOAD OK");
 if(uploadError){
   console.log(uploadError);
 alert(uploadError.message);
