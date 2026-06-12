@@ -315,12 +315,30 @@ return;
 let card=document.createElement("div");
 card.className="card";
 card.innerHTML =
-"<h3>"+(item.title || "")+"</h3>"+
+"<h3 onclick='incrementViews("+item.id+")' style='cursor:pointer;color:#1565c0;'>"+(item.title || "")+"</h3>"+
 "<p>Цена: "+(item.price || "")+"</p>"+
 "<p>"+(item.description || "")+"</p>"+
 "<p><b>Просмотров:</b> "+(item.views_count || 0)+"</p>";
 listings.appendChild(card);
 });
+}
+  async function incrementViews(id){
+
+const { data } = await supabaseClient
+.from('listings')
+.select('views_count')
+.eq('id', id)
+.single();
+
+let views = (data?.views_count || 0) + 1;
+
+await supabaseClient
+.from('listings')
+.update({ views_count: views })
+.eq('id', id);
+
+loadListings();
+
 }
 async function saveListing(){
 let title=document.getElementById("title").value;
