@@ -106,6 +106,7 @@ margin-top:30px;
 <a href="#" id="loginBtn" style="color:white;margin-right:15px;">Вход</a>
 <a href="#" id="registerBtn" style="color:white;">Регистрация</a>
 <a href="#" id="logoutBtn" style="color:white;margin-left:15px;display:none;">Выход</a>
+<a href="#" id="cabinetBtn" style="color:white;margin-left:15px;display:none;">Мой кабинет</a>
 </div>
 </header>
 <nav>
@@ -155,6 +156,19 @@ margin-top:30px;
 <h2>Последние объявления</h2>
 <div id="listings">
 </div>
+</section>
+<section id="cabinet" style="display:none; padding:20px;">
+<h2>Мой кабинет</h2>
+
+<div>
+<button id="myListingsBtn">
+            Мои объявления
+</button>
+</div>
+
+<br>
+
+<div id="myListings"></div>
 </section>
 <footer>
 BIDS.AZ Marketplace 2.0
@@ -249,6 +263,7 @@ document.getElementById("loginBtn").style.display = "none";
 document.getElementById("registerBtn").style.display = "none";
 document.getElementById("logoutBtn").style.display = "inline";
 document.getElementById("registerForm").style.display = "none";
+    document.getElementById("cabinetBtn").style.display = "inline";
 }
   document.getElementById("logoutBtn").onclick = async function(){
 
@@ -257,9 +272,16 @@ document.getElementById("registerForm").style.display = "none";
     document.getElementById("loginBtn").style.display = "inline";
     document.getElementById("registerBtn").style.display = "inline";
     document.getElementById("logoutBtn").style.display = "none";
+      document.getElementById("cabinetBtn").style.display = "none";
+document.getElementById("cabinet").style.display = "none";
 
     alert("Вы вышли из аккаунта.");
 
+};
+    document.getElementById("cabinetBtn").onclick = function(){
+
+    document.getElementById("cabinet").style.display = "block";
+document.getElementById("form").style.display = "none";
 };
 async function loadListings(){
 const { data, error } = await supabaseClient
