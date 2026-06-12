@@ -60,7 +60,7 @@ body{
 Просмотров: 12<br>
 Опубликовано: 10.06.2026<br>
 Статус: 🟢 Активно<br><br>
-<button style="background:#007bff;color:white;border:none;padding:8px 15px;border-radius:5px;cursor:pointer;margin-right:10px;">
+<button onclick="editListing()" style="background:#007bff;color:white;border:none;padding:8px 15px;border-radius:5px;cursor:pointer;margin-right:10px;">
 Редактировать
 </button>
            <button style="background:#dc3545;color:white;border:none;padding:8px 15px;border-radius:5px;cursor:pointer;">
@@ -80,6 +80,16 @@ body{
     </div>
 
 </div>
+<script>
+function editListing(){
 
+let newPrice = prompt("Введите новую цену:", "5000");
+
+if(newPrice){
+alert("Новая цена: " + newPrice + " AZN");
+}
+
+}
+</script>
 </body>
 </html>
