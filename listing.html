@@ -114,6 +114,7 @@ const { data } = await supabaseClient
 
 document.getElementById("listing").innerHTML =
 "<div class='card'>"+
+(data.image_url ? "<img src='"+data.image_url+"' style='max-width:100%;margin-bottom:15px;border-radius:8px;'>" : "")+
 "<h2>"+data.title+"</h2>"+
 "<p><b>Цена:</b> "+data.price+" AZN</p>"+
 "<p>"+(data.description || "")+"</p>"+
