@@ -377,24 +377,6 @@ supabaseClient.storage
 }
 
 }
-  const { error } = await supabaseClient
-.from('listings')
-.insert([
-{
-title:title,
-description:description,
-price:price,
-image_url:imageUrl
-}
-]);
-if(error){
-console.error(error);
-alert("Ошибка сохранения");
-return;
-}
-document.getElementById("title").value="";
-document.getElementById("price").value="";
-document.getElementById("description").value="";
 const { data: newListing, error } = await supabaseClient
 .from('listings')
 .insert([
@@ -413,8 +395,10 @@ console.error(error);
 alert("Ошибка сохранения");
 return;
 }
+document.getElementById("title").value="";
+document.getElementById("price").value="";
+document.getElementById("description").value="";
 
-window.location.href =
 "listing.html?id=" + newListing.id;
 }
 window.onload=function(){
