@@ -382,6 +382,19 @@ supabaseClient.storage
 }
 
 }
+  console.log({
+  title,
+  description,
+  price,
+  imageUrl
+});
+
+alert(JSON.stringify({
+  title,
+  description,
+  price,
+  imageUrl
+}));
 const { data: newListing, error } = await supabaseClient
 .from('listings')
 .insert([
