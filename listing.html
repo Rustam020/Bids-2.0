@@ -57,7 +57,26 @@ box-shadow:0 2px 10px rgba(0,0,0,0.1);
 <button class="back-btn" onclick="history.back()">
 Назад
 </button>
+<div id="successBox" style="
+display:none;
+background:#d4edda;
+color:#155724;
+padding:15px;
+border-radius:8px;
+margin-bottom:20px;
+">
+Объявление успешно опубликовано
+<br><br>
 
+<button onclick="copyLink()">
+Копировать ссылку
+</button>
+
+<button onclick="location.href='index.html'">
+Разместить ещё одно
+</button>
+
+</div>
 <h1>Карточка объявления</h1>
 
 </div>
@@ -100,15 +119,25 @@ document.getElementById("listing").innerHTML =
 "<p>"+(data.description || "")+"</p>"+
 "<p><b>Просмотров:</b> "+(data.views_count || 0)+"</p>"+
 "</div>";
-"<h2>"+data.title+"</h2>"+
-"<p><b>Цена:</b> "+data.price+"</p>"+
-"<p>"+(data.description || "")+"</p>"+
-"<p><b>Просмотров:</b> "+(data.views_count || 0)+"</p>";
+
 
 }
-
+if(
+document.referrer.includes("index.html")
+){
+document.getElementById("successBox").style.display="block";
+}
 loadListing();
+function copyLink(){
 
+navigator.clipboard.writeText(
+window.location.href
+);
+
+alert("Ссылка скопирована");
+
+}
 </script>
+  
 </body>
 </html>
