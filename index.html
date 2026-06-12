@@ -395,8 +395,27 @@ return;
 document.getElementById("title").value="";
 document.getElementById("price").value="";
 document.getElementById("description").value="";
-await loadListings();
-alert("Объявление сохранено");
+const { data: newListing, error } = await supabaseClient
+.from('listings')
+.insert([
+{
+title:title,
+description:description,
+price:price,
+image_url:imageUrl
+}
+])
+.select()
+.single();
+
+if(error){
+console.error(error);
+alert("Ошибка сохранения");
+return;
+}
+
+window.location.href =
+"listing.html?id=" + newListing.id;
 }
 window.onload=function(){
 loadListings();
