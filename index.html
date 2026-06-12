@@ -129,6 +129,13 @@ margin-top:30px;
 <input id="price" type="text">
 <label>Описание</label>
 <textarea id="description"></textarea>
+  <label>Описание</label>
+<textarea id="description"></textarea>
+
+<label>Фото бизнеса</label>
+<input id="image" type="file" accept="image/*">
+
+<button class="save-btn" onclick="saveListing()">Сохранить</button>
 <button class="save-btn" onclick="saveListing()">Сохранить</button>
 </div>
 <div id="registerForm" style="display:none;background:white;padding:20px;margin:20px;border-radius:8px;box-shadow:0 1px 5px rgba(0,0,0,.2);">
@@ -344,17 +351,41 @@ async function saveListing(){
 let title=document.getElementById("title").value;
 let price=document.getElementById("price").value;
 let description=document.getElementById("description").value;
+  let imageFile = document.getElementById("image").files[0];
+let imageUrl = "";
 if(title===""){
 alert("Введите название");
 return;
 }
-const { error } = await supabaseClient
+if(imageFile){
+
+const fileName =
+Date.now() + "_" + imageFile.name;
+
+const { error: uploadError } =
+await supabaseClient.storage
+.from("listing-images")
+.upload(fileName, imageFile);
+
+if(!uploadError){
+
+imageUrl =
+supabaseClient.storage
+.from("listing-images")
+.getPublicUrl(fileName)
+.data.publicUrl;
+
+}
+
+}
+  const { error } = await supabaseClient
 .from('listings')
 .insert([
 {
 title:title,
 description:description,
-price:price
+price:price,
+image_url:imageUrl
 }
 ]);
 if(error){
