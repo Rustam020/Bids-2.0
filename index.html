@@ -291,10 +291,11 @@ listings.innerHTML="";
 data.forEach(item=>{
 let card=document.createElement("div");
 card.className="card";
-card.innerHTML=
+card.innerHTML =
 "<h3>"+(item.title || "")+"</h3>"+
 "<p>Цена: "+(item.price || "")+"</p>"+
-"<p>"+(item.description || "")+"</p>";
+"<p>"+(item.description || "")+"</p>"+
+"<p><b>Просмотров:</b> "+(item.views_count || 0)+"</p>";
 listings.appendChild(card);
 });
 }
