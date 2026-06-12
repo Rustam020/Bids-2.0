@@ -10,6 +10,42 @@
 <h1>Карточка объявления</h1>
 
 <div id="listing"></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
+<script>
+
+const supabaseUrl = "ТВОЙ_SUPABASE_URL";
+const supabaseKey = "ТВОЙ_SUPABASE_ANON_KEY";
+
+const supabaseClient =
+supabase.createClient(
+supabaseUrl,
+supabaseKey
+);
+
+async function loadListing(){
+
+const params =
+new URLSearchParams(window.location.search);
+
+const id = params.get("id");
+
+const { data } = await supabaseClient
+.from("listings")
+.select("*")
+.eq("id", id)
+.single();
+
+document.getElementById("listing").innerHTML =
+"<h2>"+data.title+"</h2>"+
+"<p><b>Цена:</b> "+data.price+"</p>"+
+"<p>"+(data.description || "")+"</p>"+
+"<p><b>Просмотров:</b> "+(data.views_count || 0)+"</p>";
+
+}
+
+loadListing();
+
+</script>
 </body>
 </html>
