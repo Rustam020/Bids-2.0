@@ -269,13 +269,7 @@ document.getElementById("cabinet").style.display = "none";
     alert("Вы вышли из аккаунта.");
 
 };
-    document.getElementById("cabinetBtn").onclick = function(){
-alert("Кабинет нажат");
-    document.getElementById("cabinet").style.display = "block";
-document.getElementById("form").style.display = "none";
-document.getElementById("cabinet").scrollIntoView();                
-                loadMyListings();
-};
+
             async function loadMyListings(){
 
 const listings = document.getElementById("myListings");
