@@ -1,144 +1,376 @@
 <!DOCTYPE html>
-<html>
+<html lang="ru">
 <head>
 <meta charset="UTF-8">
-<title>Объявление</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BIDS.AZ - Объявление</title>
+
 <style>
-body{
-font-family:Arial,sans-serif;
+
+*{
 margin:0;
-background:#f5f5f5;
+padding:0;
+box-sizing:border-box;
 }
 
-.header{
-background:#1565c0;
+body{
+font-family:Arial,sans-serif;
+background:#081626;
 color:white;
-padding:30px;
+}
+
+header{
+background:#0d2238;
+padding:15px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.logo-box{
+width:52px;
+height:52px;
+background:#f4b400;
+color:#081626;
+font-weight:bold;
+font-size:22px;
+border-radius:12px;
+display:flex;
+align-items:center;
+justify-content:center;
 }
 
 .container{
+max-width:1400px;
+margin:auto;
 padding:30px;
 }
 
-.card{
-background:white;
-padding:25px;
-border-radius:10px;
-box-shadow:0 2px 10px rgba(0,0,0,0.1);
-max-width:1000px;
-margin:auto;
-}
-
-.back-btn{
-float:right;
-background:#dc3545;
-color:white;
-padding:12px 25px;
-border:none;
-border-radius:5px;
-cursor:pointer;
+.vip{
+display:inline-block;
+background:#f4b400;
+color:#081626;
+padding:8px 14px;
+border-radius:8px;
 font-weight:bold;
+margin-bottom:15px;
 }
 
-.card{
-background:white;
-padding:25px;
-border-radius:10px;
-max-width:800px;
-box-shadow:0 2px 10px rgba(0,0,0,0.1);
+.title{
+font-size:42px;
+margin-bottom:15px;
 }
+
+.top-grid{
+display:grid;
+grid-template-columns:2fr 1fr;
+gap:25px;
+margin-top:25px;
+}
+
+.gallery{
+background:#10253d;
+padding:20px;
+border-radius:15px;
+}
+
+.main-image{
+height:420px;
+background:#1a3552;
+border-radius:12px;
+display:flex;
+align-items:center;
+justify-content:center;
+font-size:24px;
+}
+
+.sidebar{
+background:#10253d;
+padding:25px;
+border-radius:15px;
+height:fit-content;
+}
+
+.price{
+font-size:38px;
+color:#f4b400;
+font-weight:bold;
+margin-bottom:20px;
+}
+
+.btn{
+width:100%;
+padding:14px;
+border:none;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
+margin-top:10px;
+}
+
+.btn-primary{
+background:#f4b400;
+color:#081626;
+}
+
+.btn-secondary{
+background:#1f3d5d;
+color:white;
+}
+
+.section{
+background:#10253d;
+padding:25px;
+border-radius:15px;
+margin-top:25px;
+}
+
+.section h2{
+margin-bottom:15px;
+}
+
+.stats{
+display:grid;
+grid-template-columns:repeat(3,1fr);
+gap:15px;
+margin-top:15px;
+}
+
+.stat{
+background:#1a3552;
+padding:15px;
+border-radius:10px;
+}
+
+@media(max-width:1000px){
+
+.top-grid{
+grid-template-columns:1fr;
+}
+
+.stats{
+grid-template-columns:1fr;
+}
+
+}
+
 </style>
 </head>
 
 <body>
 
-<div class="header">
+<header>
 
-<button class="back-btn" onclick="history.back()">
-Назад
-</button>
-<div id="successBox" style="
-display:none;
-background:#d4edda;
-color:#155724;
-padding:15px;
-border-radius:8px;
-margin-bottom:20px;
-">
-Объявление успешно опубликовано
-<br><br>
+<div class="logo">
 
-<button onclick="copyLink()">
-Копировать ссылку
-</button>
+<div class="logo-box">
+BA
+</div>
 
-<button onclick="location.href='index.html'">
-Разместить ещё одно
-</button>
+<div>
+<b>BIDS.AZ</b><br>
+<small>Marketplace</small>
+</div>
 
 </div>
-<h1>Карточка объявления</h1>
 
+<div>
+RU | EN | AZ
 </div>
+
+</header>
 
 <div class="container">
+ <div class="vip">
+⭐ VIP
+</div>
 
-<div id="listing"></div>
+<h1 class="title">
+Продажа IT компании
+</h1>
+
+<p>
+📍 Баку, Азербайджан
+</p>
+
+<div class="top-grid">
+
+<div>
+
+<div class="gallery">
+
+<div class="main-image">
+Фото бизнеса
+</div>
 
 </div>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 
-<script>
+<div class="section">
 
-const supabaseUrl='https://vnkipuhkpwcjdjxxrpef.supabase.co';
-const supabaseKey='sb_publishable_aFO8c5S7Lt3L2R1veNSJaQ_RYGsPQID';
+<h2>
+Описание бизнеса
+</h2>
 
-const supabaseClient =
-supabase.createClient(
-supabaseUrl,
-supabaseKey
-);
+<p>
+Продаётся действующая IT компания с постоянными клиентами,
+готовой командой и стабильным денежным потоком.
+Компания работает более 7 лет и обслуживает клиентов
+из Азербайджана и зарубежья.
+</p>
 
-async function loadListing(){
+</div>
 
-const params =
-new URLSearchParams(window.location.search);
+<div class="section">
 
-const id = params.get("id");
+<h2>
+Финансовые показатели
+</h2>
 
-const { data } = await supabaseClient
-.from("listings")
-.select("*")
-.eq("id", id)
-.single();
+<div class="stats">
 
-document.getElementById("listing").innerHTML =
-"<div class='card'>"+
-(data.image_url ? "<img src='"+data.image_url+"' style='max-width:100%;margin-bottom:15px;border-radius:8px;'>" : "")+
-"<h2>"+data.title+"</h2>"+
-"<p><b>Цена:</b> "+data.price+" AZN</p>"+
-"<p>"+(data.description || "")+"</p>"+
-"<p><b>Просмотров:</b> "+(data.views_count || 0)+"</p>"+
-"</div>";
+<div class="stat">
+💰 Оборот<br>
+120 000 AZN
+</div>
 
+<div class="stat">
+📈 Прибыль<br>
+35 000 AZN
+</div>
 
-}
-if(
-document.referrer.includes("index.html")
-){
-document.getElementById("successBox").style.display="block";
-}
-loadListing();
-function copyLink(){
+<div class="stat">
+⏳ Окупаемость<br>
+3 года
+</div>
 
-navigator.clipboard.writeText(
-window.location.href
-);
+</div>
 
-alert("Ссылка скопирована");
+</div>
 
-}
-</script>
-  
+<div class="section">
+
+<h2>
+Информация о бизнесе
+</h2>
+
+<p>👥 Сотрудников: 12</p>
+<br>
+
+<p>📅 Основан: 2018</p>
+<br>
+
+<p>🏢 Форма собственности: ООО</p>
+<br>
+
+<p>🏠 Помещение: В аренде</p>
+<br>
+
+<p>🌐 company.com</p>
+
+</div>
+
+</div>
+
+<div class="sidebar">
+
+<div class="price">
+250 000 AZN
+</div>
+
+<p>
+👁 Просмотров: 452
+</p>
+
+<br>
+
+<p>
+❤️ В избранном: 18
+</p>
+
+<button class="btn btn-primary">
+Связаться
+</button>
+
+<button class="btn btn-secondary">
+❤️ Добавить в избранное
+</button>
+
+<button class="btn btn-secondary">
+🚩 Пожаловаться
+</button>
+
+</div>
+
+</div> 
+<div class="section">
+
+<h2>
+📍 Местоположение
+</h2>
+
+<div class="main-image" style="height:300px;">
+Карта бизнеса
+</div>
+
+</div>
+
+<div class="section">
+
+<h2>
+Контакты
+</h2>
+
+<p>
+📧 info@company.com
+</p>
+
+<br>
+
+<p>
+📱 +994 XX XXX XX XX
+</p>
+
+<br>
+
+<p>
+💬 WhatsApp доступен
+</p>
+
+</div>
+
+<h2 style="margin-top:40px;">
+Похожие объявления
+</h2>
+
+<div class="stats" style="margin-top:20px;">
+
+<div class="stat">
+<h3>Ресторан</h3>
+<br>
+<p>180 000 AZN</p>
+</div>
+
+<div class="stat">
+<h3>Автосервис</h3>
+<br>
+<p>120 000 AZN</p>
+</div>
+
+<div class="stat">
+<h3>Франшиза</h3>
+<br>
+<p>90 000 USD</p>
+</div>
+
+</div>
+
+</div>
+
 </body>
-</html>
+</html>  
