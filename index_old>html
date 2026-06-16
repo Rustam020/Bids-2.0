@@ -1,1 +1,438 @@
-2
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BIDS.AZ Marketplace</title>
+<style>
+body{
+font-family:Arial,sans-serif;
+margin:0;
+padding:0;
+background:#f5f7fa;
+}
+header{
+background:#0d3b66;
+color:white;
+padding:20px;
+text-align:center;
+}
+nav{
+background:white;
+padding:15px;
+text-align:center;
+border-bottom:1px solid #ddd;
+}
+nav a{
+margin:0 15px;
+text-decoration:none;
+color:#0d3b66;
+font-weight:bold;
+}
+.hero{
+padding:40px;
+text-align:center;
+background:white;
+}
+.hero button{
+padding:12px 20px;
+font-size:16px;
+cursor:pointer;
+background:#0d3b66;
+color:white;
+border:none;
+border-radius:6px;
+}
+.categories{
+padding:30px;
+}
+.category-grid{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:15px;
+}
+.category{
+background:white;
+padding:20px;
+border-radius:8px;
+box-shadow:0 1px 5px rgba(0,0,0,.1);
+}
+.listings{
+padding:30px;
+}
+.card{
+background:white;
+padding:15px;
+margin-bottom:15px;
+border-radius:8px;
+box-shadow:0 1px 5px rgba(0,0,0,.1);
+}
+#form{
+display:none;
+background:white;
+padding:20px;
+margin:20px;
+border-radius:8px;
+box-shadow:0 1px 5px rgba(0,0,0,.2);
+}
+input, textarea{
+width:100%;
+padding:10px;
+margin-top:5px;
+margin-bottom:15px;
+box-sizing:border-box;
+}
+.save-btn{
+background:green;
+color:white;
+border:none;
+padding:10px 15px;
+cursor:pointer;
+}
+footer{
+text-align:center;
+padding:20px;
+background:#0d3b66;
+color:white;
+margin-top:30px;
+}
+</style>
+</head>
+<body>
+<header>
+<h1>BIDS.AZ</h1>
+<p>Buy • Sell • Invest</p>
+<div style="position:absolute;top:20px;right:30px;">
+<a href="#" id="loginBtn" style="color:white;margin-right:15px;">Вход</a>
+<a href="#" id="registerBtn" style="color:white;">Регистрация</a>
+<a href="#" id="logoutBtn" style="color:white;margin-left:15px;display:none;">Выход</a>
+<a href="Cabinet.html" id="cabinetBtn" style="color:white;margin-left:15px;display:none;">Мой кабинет</a>
+</div>
+</header>
+  
+<nav>
+<a href="#">Продажа бизнеса</a>
+<a href="#">Инвесторы</a>
+<a href="#">Стартапы</a>
+<a href="#">Контакты</a>
+</nav>
+<section class="hero">
+<h2>Маркетплейс бизнеса и инвестиций</h2>
+<p>Покупайте, продавайте бизнес и находите инвесторов.</p>
+<button onclick="showForm()">Разместить объявление</button>
+</section>
+<div id="form">
+<h3>Новое объявление</h3>
+<label>Название бизнеса</label>
+<input id="title" type="text">
+<label>Цена</label>
+<input id="price" type="text">
+<label>Описание</label>
+<textarea id="description"></textarea>
+  
+
+<label>Фото бизнеса</label>
+<input id="image" type="file" accept="image/*">
+
+<button class="save-btn" onclick="saveListing()">Сохранить</button>
+
+</div>
+<div id="registerForm" style="display:none;background:white;padding:20px;margin:20px;border-radius:8px;box-shadow:0 1px 5px rgba(0,0,0,.2);">
+
+<h3>Регистрация</h3>
+
+<label>Email</label>
+<input id="email" type="email">
+
+<label>Пароль</label>
+<input id="password" type="password">
+
+<button class="save-btn" onclick="registerUser()">Создать аккаунт</button>
+
+</div>
+
+<section class="categories">
+<h2>Категории</h2>
+<div class="category-grid">
+<div class="category">Продажа бизнеса</div>
+<div class="category">Поиск инвестора</div>
+<div class="category">Стартапы</div>
+<div class="category">Франшизы</div>
+</div>
+</section>
+<section class="listings">
+  <input
+id="searchInput"
+type="text"
+placeholder="🔍 Поиск бизнеса..."
+onkeyup="loadListings()"
+style="
+width:100%;
+padding:12px;
+margin-bottom:20px;
+border:1px solid #ddd;
+border-radius:8px;
+font-size:16px;
+box-sizing:border-box;
+">
+<h2>Последние объявления</h2>
+<div id="listings">
+</div>
+</section>
+
+<footer>
+BIDS.AZ Marketplace 2.0
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+const supabaseUrl='https://vnkipuhkpwcjdjxxrpef.supabase.co';
+const supabaseKey='sb_publishable_aFO8c5S7Lt3L2R1veNSJaQ_RYGsPQID';
+const supabaseClient=window.supabase.createClient(
+supabaseUrl,
+supabaseKey
+);
+async function showForm(){
+
+const { data:{ session } } = await supabaseClient.auth.getSession();
+
+if(!session){
+alert("Для размещения объявления необходимо войти в аккаунт.");
+return;
+    }
+
+    document.getElementById("form").style.display = "block";
+}
+document.getElementById("registerBtn").onclick = function(){
+document.querySelector("#registerForm h3").innerText = "Регистрация";
+
+document.querySelector("#registerForm button").innerText = "Создать аккаунт";
+
+document.querySelector("#registerForm button").onclick = registerUser;
+
+document.getElementById("registerForm").style.display = "block";
+
+};
+document.getElementById("loginBtn").onclick = function(){
+
+document.getElementById("registerForm").style.display = "block";
+
+document.querySelector("#registerForm h3").innerText = "Вход";
+
+document.querySelector("#registerForm button").innerText = "Войти";
+document.querySelector("#registerForm button").onclick = loginUser;
+};
+async function registerUser(){
+
+const email = document.getElementById("email").value;
+
+const password = document.getElementById("password").value;
+
+const { data, error } = await supabaseClient.auth.signUp({
+
+email: email,
+
+password: password
+
+});
+
+if(error){
+
+alert(error.message);
+
+return;
+
+}
+
+alert("Аккаунт создан. Проверьте email.");
+
+}
+async function loginUser(){
+
+const email = document.getElementById("email").value;
+
+const password = document.getElementById("password").value;
+
+const { data, error } = await supabaseClient.auth.signInWithPassword({
+
+email: email,
+
+password: password
+
+});
+
+if(error){
+
+alert(error.message);
+
+return;
+
+}
+
+alert("Вход выполнен успешно.");
+document.getElementById("loginBtn").style.display = "none";
+document.getElementById("registerBtn").style.display = "none";
+document.getElementById("logoutBtn").style.display = "inline";
+document.getElementById("registerForm").style.display = "none";
+    document.getElementById("cabinetBtn").style.display = "inline";
+            document.getElementById("form").style.display = "none";
+}
+  document.getElementById("logoutBtn").onclick = async function(){
+
+    await supabaseClient.auth.signOut();
+
+    document.getElementById("loginBtn").style.display = "inline";
+    document.getElementById("registerBtn").style.display = "inline";
+    document.getElementById("logoutBtn").style.display = "none";
+      document.getElementById("cabinetBtn").style.display = "none";
+document.getElementById("cabinet").style.display = "none";
+
+    alert("Вы вышли из аккаунта.");
+
+};
+
+            async function loadMyListings(){
+
+const listings = document.getElementById("myListings");
+
+listings.innerHTML = "<p>Загрузка...</p>";
+
+}
+async function loadListings(){
+let search =
+document.getElementById("searchInput")?.value?.toLowerCase() || "";
+  const { data, error } = await supabaseClient
+.from('listings')
+.select('*')
+.order('id',{ascending:false});
+if(error){
+console.error(error);
+return;
+}
+let listings=document.getElementById("listings");
+listings.innerHTML="";
+data.forEach(item=>{
+  if(
+search &&
+!(item.title || "").toLowerCase().includes(search) &&
+!(item.description || "").toLowerCase().includes(search)
+){
+return;
+}
+let card=document.createElement("div");
+card.className="card";
+card.innerHTML =
+"<h3 onclick='incrementViews("+item.id+")' style='cursor:pointer;color:#1565c0;'>"+(item.title || "")+"</h3>"+
+"<p>Цена: "+(item.price || "")+"</p>"+
+"<p>"+(item.description || "")+"</p>"+
+"<p><b>Просмотров:</b> "+(item.views_count || 0)+"</p>";
+listings.appendChild(card);
+});
+}
+  async function incrementViews(id){
+
+const { data } = await supabaseClient
+.from('listings')
+.select('views_count')
+.eq('id', id)
+.single();
+
+let views = (data?.views_count || 0) + 1;
+
+await supabaseClient
+.from('listings')
+.update({ views_count: views })
+.eq('id', id);
+
+loadListings();
+window.location.href = "listing.html?id=" + id;
+}
+async function saveListing(){
+  const { data: { user } } = await supabaseClient.auth.getUser();
+
+if (!user) {
+    alert("Для размещения объявления необходимо войти в аккаунт");
+    window.location.href = "login.html";
+    return;
+}
+let title=document.getElementById("title").value;
+let price=document.getElementById("price").value;
+let description=document.getElementById("description").value;
+  let imageFile = document.getElementById("image").files[0];
+let imageUrl = "";
+if(title===""){
+alert("Введите название");
+return;
+}
+if(imageFile){
+
+const fileName =
+Date.now() + "_" + imageFile.name;
+
+const { error: uploadError } =
+await supabaseClient.storage
+.from("listing-images")
+.upload(fileName, imageFile);
+  alert("UPLOAD OK");
+if(uploadError){
+  console.log(uploadError);
+alert(uploadError.message);
+return;
+}
+if(!uploadError){
+
+imageUrl =
+supabaseClient.storage
+.from("listing-images")
+.getPublicUrl(fileName)
+.data.publicUrl;
+
+}
+
+}
+  console.log({
+  title,
+  description,
+  price,
+  imageUrl
+});
+
+alert(JSON.stringify({
+  title,
+  description,
+  price,
+  imageUrl
+}));
+const { data: newListing, error } = await supabaseClient
+.from('listings')
+.insert([
+{
+title:title,
+description:description,
+price:price,
+image_url:imageUrl
+}
+])
+.select()
+.single();
+
+if(error){
+console.error(error);
+alert("Ошибка сохранения");
+return;
+}
+document.getElementById("title").value="";
+document.getElementById("price").value="";
+document.getElementById("description").value="";
+
+alert("Объявление успешно опубликовано");
+
+window.location.href =
+"listing.html?id=" + newListing.id;
+}
+window.onload=function(){
+loadListings();
+};
+
+</script>
+</body>
+</html>
