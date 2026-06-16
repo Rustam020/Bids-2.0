@@ -146,3 +146,156 @@ font-weight:600;
 transform:translateY(-4px);
 border:1px solid #f4b400;
 }
+.cards{
+display:grid;
+grid-template-columns:repeat(4,1fr);
+gap:20px;
+}
+
+.card{
+background:#10253d;
+border-radius:14px;
+padding:20px;
+transition:.3s;
+}
+
+.card:hover{
+transform:translateY(-4px);
+}
+
+.price{
+color:#f4b400;
+font-size:24px;
+font-weight:bold;
+margin:10px 0;
+}
+
+.vip{
+border:2px solid #f4b400;
+}
+
+footer{
+background:#0d2238;
+padding:40px;
+text-align:center;
+margin-top:50px;
+}
+
+.lang{
+font-size:14px;
+}
+
+@media(max-width:1000px){
+
+.categories,
+.cards{
+grid-template-columns:repeat(2,1fr);
+}
+
+.hero h1{
+font-size:42px;
+}
+
+}
+
+@media(max-width:700px){
+
+.categories,
+.cards{
+grid-template-columns:1fr;
+}
+
+.search{
+flex-direction:column;
+}
+
+header{
+padding:15px;
+}
+
+nav{
+display:none;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+
+<div class="logo-box">
+BA
+</div>
+
+<div>
+<div><b>BIDS.AZ</b></div>
+<div style="font-size:12px;">
+Marketplace for Business & Investments
+</div>
+</div>
+
+</div>
+
+<nav>
+
+<a href="#">Главная</a>
+<a href="#">Категории</a>
+<a href="#vip">VIP</a>
+<a href="#contacts">Контакты</a>
+<a href="#">❤️ Избранное</a>
+<a href="#">👤 Кабинет</a>
+
+</nav>
+
+<div class="lang">
+RU | EN | AZ
+</div>
+
+</header>
+
+<section class="hero">
+
+<h1>BIDS.AZ</h1>
+
+<p>
+Покупайте бизнес.<br>
+Привлекайте инвестиции.<br>
+Находите партнёров.
+</p>
+
+<p style="margin-top:20px;">
+Крупнейшая площадка для продажи бизнеса,
+поиска инвесторов и инвестиционных проектов.
+</p>
+
+<div class="search">
+
+<input
+type="text"
+placeholder="Поиск бизнеса, инвестора, стартапа..."
+>
+
+<button>
+Найти
+</button>
+
+</div>
+
+<div class="actions">
+
+<button class="btn">
+Стать инвестором
+</button>
+
+<button class="btn btn2">
+Разместить объявление
+</button>
+
+</div>
+
+</section>
