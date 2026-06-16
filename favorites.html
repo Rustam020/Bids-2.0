@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BIDS.AZ - Избранное</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:Arial,sans-serif;
+background:#081626;
+color:white;
+}
+
+header{
+background:#0d2238;
+padding:15px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.logo-box{
+width:52px;
+height:52px;
+background:#f4b400;
+color:#081626;
+font-weight:bold;
+font-size:22px;
+border-radius:12px;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.container{
+max-width:1400px;
+margin:auto;
+padding:30px;
+}
+
+.title{
+font-size:42px;
+margin-bottom:10px;
+}
+
+.subtitle{
+opacity:.8;
+margin-bottom:30px;
+}
+
+.favorites{
+display:grid;
+grid-template-columns:repeat(2,1fr);
+gap:20px;
+}
+
+.card{
+background:#10253d;
+padding:20px;
+border-radius:15px;
+}
+
+.price{
+font-size:28px;
+color:#f4b400;
+font-weight:bold;
+margin:10px 0;
+}
+
+.buttons{
+display:flex;
+gap:10px;
+margin-top:15px;
+}
+
+.btn{
+padding:12px 16px;
+border:none;
+border-radius:8px;
+cursor:pointer;
+font-weight:bold;
+}
+
+.btn-open{
+background:#f4b400;
+color:#081626;
+}
+
+.btn-remove{
+background:#b92d2d;
+color:white;
+}
+
+.empty{
+background:#10253d;
+padding:40px;
+border-radius:15px;
+text-align:center;
+margin-top:20px;
+}
+
+@media(max-width:900px){
+
+.favorites{
+grid-template-columns:1fr;
+}
+
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+
+<div class="logo-box">
+BA
+</div>
+
+<div>
+<b>BIDS.AZ</b><br>
+<small>Favorites</small>
+</div>
+
+</div>
+
+<div>
+RU | EN | AZ
+</div>
+
+</header>
+
+<div class="container">
+
+<h1 class="title">
+❤️ Избранное
+</h1>
+
+<p class="subtitle">
+Сохранённые объявления пользователя
+</p>
+<div class="favorites">
+
+<div class="card">
+
+<h3>
+Продажа IT компании
+</h3>
+
+<div class="price">
+250 000 AZN
+</div>
+
+<p>
+📍 Баку
+</p>
+
+<p>
+👁 452 просмотра
+</p>
+
+<div class="buttons">
+
+<button class="btn btn-open">
+Открыть
+</button>
+
+<button class="btn btn-remove">
+Удалить
+</button>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h3>
+Ресторан в Баку
+</h3>
+
+<div class="price">
+180 000 AZN
+</div>
+
+<p>
+📍 Баку
+</p>
+
+<p>
+👁 318 просмотров
+</p>
+
+<div class="buttons">
+
+<button class="btn btn-open">
+Открыть
+</button>
+
+<button class="btn btn-remove">
+Удалить
+</button>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h3>
+Инвестиционный проект
+</h3>
+
+<div class="price">
+По договорённости
+</div>
+
+<p>
+📍 Лондон
+</p>
+
+<p>
+👁 97 просмотров
+</p>
+
+<div class="buttons">
+
+<button class="btn btn-open">
+Открыть
+</button>
+
+<button class="btn btn-remove">
+Удалить
+</button>
+
+</div>
+
+</div>
+
+<div class="card">
+
+<h3>
+Франшиза
+</h3>
+
+<div class="price">
+90 000 USD
+</div>
+
+<p>
+📍 Стамбул
+</p>
+
+<p>
+👁 201 просмотр
+</p>
+
+<div class="buttons">
+
+<button class="btn btn-open">
+Открыть
+</button>
+
+<button class="btn btn-remove">
+Удалить
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="empty">
+
+<h2>
+Пустое состояние
+</h2>
+
+<br>
+
+<p>
+У вас пока нет избранных объявлений.
+Этот блок будет показываться, когда список пуст.
+</p>
+
+</div>
+
+</div>
+
+</body>
+</html>
