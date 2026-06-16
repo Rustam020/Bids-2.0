@@ -347,6 +347,13 @@ loadListings();
 window.location.href = "listing.html?id=" + id;
 }
 async function saveListing(){
+  const { data: { user } } = await supabaseClient.auth.getUser();
+
+if (!user) {
+    alert("Для размещения объявления необходимо войти в аккаунт");
+    window.location.href = "login.html";
+    return;
+}
 let title=document.getElementById("title").value;
 let price=document.getElementById("price").value;
 let description=document.getElementById("description").value;
