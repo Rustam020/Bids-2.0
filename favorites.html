@@ -304,6 +304,20 @@ RU | EN | AZ
 </div>
 
 </div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script src="supabase.js"></script>
 
+<script>
+async function loadFavorites() {
+    const { data, error } = await supabaseClient
+        .from('favorites')
+        .select('*');
+
+    console.log('Favorites:', data);
+    console.log('Error:', error);
+}
+
+loadFavorites();
+</script>
 </body>
 </html>
