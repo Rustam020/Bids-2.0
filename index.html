@@ -3,11 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>BIDS.AZ | Business Marketplace</title>
+<title>BIDS.AZ V4</title>
 
 <style>
-
 *{
 margin:0;
 padding:0;
@@ -17,418 +15,134 @@ box-sizing:border-box;
 body{
 font-family:Arial,sans-serif;
 background:#081626;
-color:white;
+color:#fff;
 }
 
 header{
 background:#0d2238;
-padding:20px 40px;
+position:sticky;
+top:0;
+padding:15px 40px;
 display:flex;
 justify-content:space-between;
 align-items:center;
-border-bottom:1px solid rgba(255,255,255,.1);
-position:sticky;
-top:0;
-z-index:100;
+z-index:1000;
 }
 
 .logo{
 display:flex;
 align-items:center;
-gap:15px;
+gap:12px;
 }
 
 .logo-box{
-width:55px;
-height:55px;
+width:58px;
+height:58px;
+border-radius:14px;
 background:#f4b400;
-border-radius:12px;
+color:#081626;
+font-weight:700;
+font-size:24px;
 display:flex;
 align-items:center;
 justify-content:center;
-font-size:28px;
-font-weight:bold;
-color:#0d2238;
-}
-
-.logo-text h1{
-font-size:28px;
-}
-
-.logo-text p{
-font-size:12px;
-color:#cfcfcf;
-}
-
-nav{
-display:flex;
-gap:25px;
 }
 
 nav a{
 color:white;
 text-decoration:none;
-font-weight:bold;
+margin:0 10px;
+font-weight:600;
+}
+
+nav a:hover{
+color:#f4b400;
 }
 
 .hero{
-padding:120px 30px;
+padding:90px 20px;
 text-align:center;
-background:
-linear-gradient(
-135deg,
-#081626,
-#102f52
-);
+background:linear-gradient(135deg,#0b2a4d,#123e70);
 }
 
-.hero h2{
-font-size:60px;
+.hero h1{
+font-size:64px;
 margin-bottom:20px;
 }
 
 .hero p{
-font-size:24px;
+font-size:22px;
 line-height:1.8;
-color:#d8d8d8;
-margin-bottom:40px;
 }
 
-.search-box{
-max-width:800px;
-margin:auto;
+.search{
+max-width:900px;
+margin:35px auto;
 display:flex;
 gap:10px;
 }
 
-.search-box input{
+.search input{
 flex:1;
-padding:18px;
-font-size:18px;
+padding:16px;
 border:none;
 border-radius:10px;
 }
 
-.search-box button{
-padding:18px 25px;
+.search button{
 background:#f4b400;
 border:none;
+padding:16px 24px;
 border-radius:10px;
 font-weight:bold;
 cursor:pointer;
 }
 
-.hero-buttons{
-margin-top:20px;
+.btn{
+background:#f4b400;
+border:none;
+padding:16px 24px;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
+}
+
+.btn2{
+background:white;
+color:#111;
+}
+
+.actions{
 display:flex;
 justify-content:center;
 gap:15px;
-flex-wrap:wrap;
-}
-
-.hero-buttons a{
-padding:15px 25px;
-border-radius:10px;
-text-decoration:none;
-font-weight:bold;
-}
-
-.btn-main{
-background:#f4b400;
-color:#081626;
-}
-
-.btn-secondary{
-background:white;
-color:#081626;
 }
 
 .section{
 padding:60px 40px;
 }
 
-.section-title{
-font-size:32px;
-margin-bottom:30px;
+.section h2{
+margin-bottom:25px;
+font-size:34px;
 }
 
 .categories{
 display:grid;
-grid-template-columns:repeat(auto-fit,minmax(220px,1fr));
-gap:20px;
+grid-template-columns:repeat(4,1fr);
+gap:15px;
 }
 
 .category{
 background:#10253d;
-padding:25px;
 border-radius:14px;
+padding:20px;
 text-align:center;
-font-weight:bold;
-cursor:pointer;
 transition:.3s;
+font-weight:600;
 }
 
 .category:hover{
-transform:translateY(-5px);
+transform:translateY(-4px);
+border:1px solid #f4b400;
 }
-
-.vip-grid,
-.listings-grid{
-display:grid;
-grid-template-columns:repeat(auto-fit,minmax(320px,1fr));
-gap:25px;
-}
-
-.card{
-background:white;
-color:#222;
-border-radius:15px;
-overflow:hidden;
-}
-
-.card img{
-width:100%;
-height:220px;
-object-fit:cover;
-}
-
-.card-body{
-padding:20px;
-}
-
-.card-category{
-color:#666;
-font-size:14px;
-margin-bottom:8px;
-}
-
-.card-title{
-font-size:22px;
-font-weight:bold;
-margin-bottom:10px;
-}
-
-.card-price{
-font-size:24px;
-font-weight:bold;
-color:#1e4fa3;
-margin-bottom:10px;
-}
-
-.card-desc{
-color:#666;
-margin-bottom:15px;
-}
-
-.card-footer{
-display:flex;
-justify-content:space-between;
-font-size:14px;
-color:#888;
-}
-
-.vip-card{
-border:3px solid #f4b400;
-}
-
-footer{
-margin-top:80px;
-background:#0d2238;
-padding:40px;
-text-align:center;
-color:#bcbcbc;
-}
-
-@media(max-width:768px){
-
-header{
-flex-direction:column;
-gap:20px;
-}
-
-nav{
-flex-wrap:wrap;
-justify-content:center;
-}
-
-.hero h2{
-font-size:40px;
-}
-
-.hero p{
-font-size:18px;
-}
-
-.search-box{
-flex-direction:column;
-}
-
-}
-
-</style>
-</head>
-
-<body>
-
-<header>
-
-<div class="logo">
-
-<div class="logo-box">
-B
-</div>
-
-<div class="logo-text">
-<h1>BIDS.AZ</h1>
-<p>Business Marketplace</p>
-</div>
-
-</div>
-
-<nav>
-
-<a href="#">Главная</a>
-
-<a href="#">Категории</a>
-
-<a href="#">VIP</a>
-
-<a href="#">Контакты</a>
-
-<a href="#">❤️ Избранное</a>
-
-<a href="Cabinet.html">👤 Кабинет</a>
-
-</nav>
-
-</header>
-
-<section class="hero">
-
-<h2>BIDS.AZ</h2>
-
-<p>
-
-Покупайте бизнес.<br>
-
-Привлекайте инвестиции.<br>
-
-Находите партнёров.
-
-</p>
-
-<div class="search-box">
-
-<input
-type="text"
-placeholder="Поиск бизнеса..."
->
-
-<button>
-Найти
-</button>
-
-</div>
-
-<div class="hero-buttons">
-
-<a href="#" class="btn-main">
-Стать инвестором
-</a>
-
-<a href="Cabinet.html" class="btn-secondary">
-Разместить объявление
-</a>
-
-</div>
-
-</section>
-
-<section class="section">
-
-<h2 class="section-title">
-Категории
-</h2>
-
-<div class="categories">
-
-<div class="category">Продажа бизнеса</div>
-
-<div class="category">Поиск инвестора</div>
-
-<div class="category">Стартапы</div>
-
-<div class="category">Франшизы</div>
-
-<div class="category">Готовый бизнес</div>
-
-<div class="category">Коммерческая недвижимость</div>
-
-<div class="category">Партнёрство</div>
-
-<div class="category">Инвестиционные проекты</div>
-
-</div>
-
-</section>
-
-<section class="section">
-
-<h2 class="section-title">
-⭐ VIP Объявления
-</h2>
-
-<div class="vip-grid">
-
-<div class="card vip-card">
-
-<div class="card-body">
-
-<div class="card-category">
-VIP
-</div>
-
-<div class="card-title">
-Продажа IT компании
-</div>
-
-<div class="card-price">
-250 000 AZN
-</div>
-
-<div class="card-desc">
-Готовый бизнес с клиентской базой.
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-</section>
-
-<section class="section">
-
-<h2 class="section-title">
-Последние объявления
-</h2>
-
-<div id="listings" class="listings-grid">
-
-</div>
-
-</section>
-
-<footer>
-
-BIDS.AZ © 2025
-
-<br><br>
-
-Business Marketplace
-
-</footer>
-
-</body>
-</html>
