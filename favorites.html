@@ -309,9 +309,25 @@ RU | EN | AZ
 
 <script>
 async function loadFavorites() {
-    const { data, error } = await supabaseClient
-        .from('favorites')
-        .select('*');
+     const { data, error } = await supabaseClient
+    .from('favorites')
+    .select('*');
+
+  console.log('Favorites:', data);
+  console.log('Error:', error);
+
+  const countBlock = document.createElement('div');
+  countBlock.style.color = 'yellow';
+  countBlock.style.fontSize = '24px';
+  countBlock.style.margin = '20px';
+
+  countBlock.innerText =
+    'Найдено избранных: ' + (data ? data.length : 0);
+
+  document.body.prepend(countBlock);
+}
+
+loadFavorites();
 
     console.log('Favorites:', data);
     console.log('Error:', error);
