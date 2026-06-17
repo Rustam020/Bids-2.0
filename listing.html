@@ -270,54 +270,38 @@ RU | EN | AZ
 
 <p>🏠 Помещение: В аренде</p>
 <br>
-
 <p>🌐 company.com</p>
-
 </div>
-
 </div>
-
 <div class="sidebar">
-
 <div class="price">
 250 000 AZN
 </div>
-
 <p>
 👁 Просмотров: 452
 </p>
-
 <br>
-
 <p>
 ❤️ В избранном: 18
 </p>
-
 <button class="btn btn-primary">
 Связаться
 </button>
-
-<button class="btn btn-secondary">
+<button class="btn btn-secondary" onclick="addToFavorites()">
 ❤️ Добавить в избранное
 </button>
-
 <button class="btn btn-secondary">
 🚩 Пожаловаться
 </button>
-
 </div>
-
 </div> 
 <div class="section">
-
 <h2>
 📍 Местоположение
 </h2>
-
 <div class="main-image" style="height:300px;">
 Карта бизнеса
 </div>
-
 </div>
 
 <div class="section">
@@ -371,6 +355,31 @@ RU | EN | AZ
 </div>
 
 </div>
+<script>
 
+async function addToFavorites(){
+
+const { data: { user } } =
+await supabaseClient.auth.getUser();
+
+if(!user){
+alert("Сначала войдите в аккаунт");
+return;
+}
+
+await supabaseClient
+.from('favorites')
+.insert([
+{
+user_id:user.id,
+listing_id:1
+}
+]);
+
+alert("Добавлено в избранное");
+
+}
+
+</script>
 </body>
 </html>  
