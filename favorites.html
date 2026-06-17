@@ -291,10 +291,14 @@ async function loadFavorites(){
 }
 async function removeFavorite(id) {
 console.log('DELETE CLICK', id);
-    const { error } = await supabaseClient
-        .from('favorites')
-        .delete()
-        .eq('id', id);
+    const { data, error } = await supabaseClient
+    .from('favorites')
+    .delete()
+    .eq('id', id)
+    .select();
+
+console.log('DELETE DATA:', data);
+console.log('DELETE ERROR:', error);
 
     if (error) {
         alert('Ошибка удаления');
