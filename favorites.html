@@ -289,7 +289,21 @@ async function loadFavorites(){
         `;
     }
 }
+async function removeFavorite(id) {
 
+    const { error } = await supabaseClient
+        .from('favorites')
+        .delete()
+        .eq('id', id);
+
+    if (error) {
+        alert('Ошибка удаления');
+        console.log(error);
+        return;
+    }
+
+    loadFavorites();
+}
 loadFavorites();
      </script>
 
