@@ -290,7 +290,7 @@ async function loadFavorites(){
     }
 }
 async function removeFavorite(id) {
-
+console.log('DELETE CLICK', id);
     const { error } = await supabaseClient
         .from('favorites')
         .delete()
