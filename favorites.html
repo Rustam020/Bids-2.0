@@ -316,7 +316,28 @@ async function loadFavorites() {
 
   console.log('Favorites:', data);
   console.log('Error:', error);
-
+const container = document.getElementById('favoritesContainer');
+container.innerHTML = '';
+data.forEach(item => {
+    container.innerHTML += `
+        <div class="card">
+            <h3>${item.title || 'Без названия'}</h3>
+            <div class="price">
+                ${item.price || '-'}
+            </div>
+            <p>📍 ${item.location || '-'}</p>
+            <p>👁️ ${item.views || 0} просмотров</p>
+            <div class="buttons">
+                <button class="btn btn-open">
+                    Открыть
+                </button>
+                <button class="btn btn-remove">
+                    Удалить
+                </button>
+            </div>
+        </div>
+    `;
+});
   const countBlock = document.createElement('div');
   countBlock.style.color = 'yellow';
   countBlock.style.fontSize = '24px';
