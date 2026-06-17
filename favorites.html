@@ -62,6 +62,12 @@ opacity:.8;
 margin-bottom:30px;
 }
 
+.counter{
+color:#f4b400;
+font-size:22px;
+margin-bottom:25px;
+}
+
 .favorites{
 display:grid;
 grid-template-columns:repeat(2,1fr);
@@ -110,7 +116,7 @@ background:#10253d;
 padding:40px;
 border-radius:15px;
 text-align:center;
-margin-top:20px;
+display:none;
 }
 
 @media(max-width:900px){
@@ -156,204 +162,135 @@ RU | EN | AZ
 <p class="subtitle">
 Сохранённые объявления пользователя
 </p>
+
+<div class="counter" id="favoritesCount">
+Найдено избранных: 0
+</div>
+
 <div class="favorites" id="favoritesContainer">
-
-<div class="card">
-
-<h3>
-Продажа IT компании
-</h3>
-
-<div class="price">
-250 000 AZN
 </div>
 
-<p>
-📍 Баку
-</p>
-
-<p>
-👁 452 просмотра
-</p>
-
-<div class="buttons">
-
-<button class="btn btn-open">
-Открыть
-</button>
-
-<button class="btn btn-remove">
-Удалить
-</button>
-
-</div>
-
-</div>
-
-<div class="card">
-
-<h3>
-Ресторан в Баку
-</h3>
-
-<div class="price">
-180 000 AZN
-</div>
-
-<p>
-📍 Баку
-</p>
-
-<p>
-👁 318 просмотров
-</p>
-
-<div class="buttons">
-
-<button class="btn btn-open">
-Открыть
-</button>
-
-<button class="btn btn-remove">
-Удалить
-</button>
-
-</div>
-
-</div>
-
-<div class="card">
-
-<h3>
-Инвестиционный проект
-</h3>
-
-<div class="price">
-По договорённости
-</div>
-
-<p>
-📍 Лондон
-</p>
-
-<p>
-👁 97 просмотров
-</p>
-
-<div class="buttons">
-
-<button class="btn btn-open">
-Открыть
-</button>
-
-<button class="btn btn-remove">
-Удалить
-</button>
-
-</div>
-
-</div>
-
-<div class="card">
-
-<h3>
-Франшиза
-</h3>
-
-<div class="price">
-90 000 USD
-</div>
-
-<p>
-📍 Стамбул
-</p>
-
-<p>
-👁 201 просмотр
-</p>
-
-<div class="buttons">
-
-<button class="btn btn-open">
-Открыть
-</button>
-
-<button class="btn btn-remove">
-Удалить
-</button>
-
-</div>
-
-</div>
-
-</div>
-
-<div class="empty">
+<div class="empty" id="emptyState">
 
 <h2>
-Пустое состояние
+Пока нет избранных объявлений
 </h2>
 
 <br>
 
 <p>
-У вас пока нет избранных объявлений.
-Этот блок будет показываться, когда список пуст.
+Добавьте первое объявление в избранное.
 </p>
 
 </div>
 
 </div>
+
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 <script src="supabase.js"></script>
 
 <script>
-async function loadFavorites() {
-     const { data, error } = await supabaseClient
-   .from('listings')
-.select('*')
+     async function removeFavorite(id){
 
+    await supabaseClient
+        .from('favorites')
+        .delete()
+        .eq('id', id);
 
-  console.log('Favorites:', data);
-  console.log('Error:', error);
-const container = document.getElementById('favoritesContainer');
-container.innerHTML = '';
-data.forEach(item => {
-    container.innerHTML += `
-        <div class="card">
-            <h3>${item.title || 'Без названия'}</h3>
-            <div class="price">
-                ${item.price || '-'}
+    loadFavorites();
+}
+
+async function loadFavorites(){
+
+    const container =
+        document.getElementById('favoritesContainer');
+
+    const emptyState =
+        document.getElementById('emptyState');
+
+    const counter =
+        document.getElementById('favoritesCount');
+
+    container.innerHTML = '';
+
+    const { data: favorites, error } =
+        await supabaseClient
+            .from('favorites')
+            .select('*');
+
+    console.log('Favorites:', favorites);
+    console.log('Error:', error);
+
+    if(error){
+        return;
+    }
+
+    counter.innerText =
+        'Найдено избранных: ' + favorites.length;
+
+    if(favorites.length === 0){
+
+        emptyState.style.display = 'block';
+
+        return;
+    }
+
+    emptyState.style.display = 'none';
+
+    for(const fav of favorites){
+
+        const { data: listing } =
+            await supabaseClient
+                .from('listings')
+                .select('*')
+                .eq('id', fav.listing_id)
+                .single();
+
+        if(!listing){
+            continue;
+        }
+
+        container.innerHTML += `
+            <div class="card">
+
+                <h3>
+                    ${listing.title || 'Без названия'}
+                </h3>
+
+                <div class="price">
+                    ${listing.price || '-'}
+                </div>
+
+                <p>
+                    📍 ${listing.city || '-'}
+                </p>
+
+                <p>
+                    👁 ${listing.views || 0} просмотров
+                </p>
+
+                <div class="buttons">
+
+                    <button
+                        class="btn btn-open">
+                        Открыть
+                    </button>
+
+                    <button
+                        class="btn btn-remove"
+                        onclick="removeFavorite(${fav.id})">
+                        Удалить
+                    </button>
+
+                </div>
+
             </div>
-            <p>📍 ${item.location || '-'}</p>
-            <p>👁️ ${item.views || 0} просмотров</p>
-            <div class="buttons">
-                <button class="btn btn-open">
-                    Открыть
-                </button>
-                <button class="btn btn-remove">
-                    Удалить
-                </button>
-            </div>
-        </div>
-    `;
-});
-  const countBlock = document.createElement('div');
-  countBlock.style.color = 'yellow';
-  countBlock.style.fontSize = '24px';
-  countBlock.style.margin = '20px';
-
-  countBlock.innerText =
-    'Найдено избранных: ' + (data ? data.length : 0);
-
-  document.body.prepend(countBlock);
+        `;
+    }
 }
 
 loadFavorites();
+     </script>
 
-    
-
-loadFavorites();
-</script>
 </body>
 </html>
