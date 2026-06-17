@@ -310,8 +310,9 @@ RU | EN | AZ
 <script>
 async function loadFavorites() {
      const { data, error } = await supabaseClient
-    .from('favorites')
-    .select('*');
+   .from('listings')
+.select('*')
+.eq('id', 15);
 
   console.log('Favorites:', data);
   console.log('Error:', error);
