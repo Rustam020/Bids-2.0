@@ -375,14 +375,17 @@ await supabaseClient
 .insert([
 {
 user_id:user.id,
-listing_id:3
+listing_id: Number(localStorage.getItem('currentListingId'))
 }
 ]);
 console.log('Добавлено', user.id, 3);
 alert("Добавлено в избранное");
 
 }
-
+function openListing(id){
+localStorage.setItem('currentListingId', id);
+window.location.href='listing.html';
+}
 </script>
 </body>
 </html>  
