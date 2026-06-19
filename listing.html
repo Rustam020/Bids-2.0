@@ -218,11 +218,8 @@ RU | EN | AZ
 Описание бизнеса
 </h2>
 
-<p>
-Продаётся действующая IT компания с постоянными клиентами,
-готовой командой и стабильным денежным потоком.
-Компания работает более 7 лет и обслуживает клиентов
-из Азербайджана и зарубежья.
+<p id="description">
+Загрузка...
 </p>
 
 </div>
@@ -372,6 +369,8 @@ const { data, error } = await supabaseClient
 console.log('LISTING:', data);
 console.log('ERROR:', error);
 document.querySelector('h1').innerText = data.title || 'Без названия';
+ document.getElementById('description').innerText =
+  data.description || 'Нет описания';
 console.log(data);
 }
 
