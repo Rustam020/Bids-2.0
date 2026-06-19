@@ -359,7 +359,22 @@ RU | EN | AZ
  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 <script src="supabase.js"></script>
 <script>
+const listingId = Number(localStorage.getItem('currentListingId'));
 
+async function loadListing(){
+
+const { data, error } = await supabaseClient
+.from('listings')
+.select('*')
+.eq('id', listingId)
+.single();
+
+console.log('LISTING:', data);
+console.log('ERROR:', error);
+
+}
+
+loadListing();
 async function addToFavorites(){
 
 const { data: { user } } =
