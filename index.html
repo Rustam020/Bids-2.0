@@ -511,7 +511,7 @@ const container = document.getElementById('latestListings');
 container.innerHTML = '';
 data.forEach(item => {
 container.innerHTML += `
-<div class="card">
+<div class="card" onclick="openListing(${item.id})">
 <h3>${item.title || 'Без названия'}</h3>
 <div class="price">
 ${item.price || 0} AZN
@@ -526,6 +526,10 @@ ${item.price || 0} AZN
 `;
 });
 }
+   function openListing(id){
+localStorage.setItem('currentListingId', id);
+window.location.href = 'listing.html';
+} 
 loadLatestListings();
 </script>
 </body>
