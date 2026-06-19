@@ -371,7 +371,7 @@ const { data, error } = await supabaseClient
 
 console.log('LISTING:', data);
 console.log('ERROR:', error);
-
+document.querySelector('h1').innerText = data.title || 'Без названия';
 }
 
 loadListing();
