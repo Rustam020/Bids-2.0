@@ -205,7 +205,16 @@ RU | EN | AZ
 <div class="gallery">
 
 <div class="main-image">
-Фото бизнеса
+<img
+id="listingImage"
+src=""
+style="
+width:100%;
+height:100%;
+object-fit:cover;
+border-radius:20px;
+"
+/>
 </div>
 
 </div>
@@ -369,6 +378,8 @@ console.log('ERROR:', error);
 document.querySelector('h1').innerText = data.title || 'Без названия';
  document.getElementById('description').innerText =
   data.description || 'Нет описания';
+ document.getElementById('listingImage').src =
+'https://vnkipuhkpwcjdjxxrpef.supabase.co/storage/v1/object/public/listing-images/4bdc92e5-37ba-4206-9112-9b5756fa866f.jpg';
 console.log(data);
 }
 
