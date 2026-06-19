@@ -373,7 +373,8 @@ console.log('LISTING:', data);
 console.log('ERROR:', error);
 document.querySelector('h1').innerText = data.title || 'Без названия';
  
-
+document.querySelector('.title').innerText = data.title || 'Без названия';
+console.log('TITLE SET');
  console.log(data);
 }
 
