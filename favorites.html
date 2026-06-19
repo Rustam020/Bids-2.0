@@ -312,6 +312,10 @@ console.log('DELETE ERROR:', error);
     loadFavorites();
 }
 loadFavorites();
+     function openListing(id){
+localStorage.setItem('currentListingId', id);
+window.location.href='listing.html';
+}
      </script>
 
 </body>
