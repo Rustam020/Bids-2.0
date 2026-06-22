@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>BIDS.AZ - Создать объявление</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+}
+
+body{
+font-family:Arial,sans-serif;
+background:#081626;
+color:white;
+}
+
+header{
+background:#0d2238;
+padding:15px 40px;
+display:flex;
+justify-content:space-between;
+align-items:center;
+}
+
+.logo{
+display:flex;
+align-items:center;
+gap:12px;
+}
+
+.logo-box{
+width:52px;
+height:52px;
+background:#f4b400;
+color:#081626;
+font-weight:bold;
+font-size:22px;
+border-radius:12px;
+display:flex;
+align-items:center;
+justify-content:center;
+}
+
+.container{
+max-width:900px;
+margin:auto;
+padding:40px 20px;
+}
+
+.card{
+background:#10253d;
+padding:30px;
+border-radius:15px;
+}
+
+h1{
+margin-bottom:25px;
+}
+
+.form-group{
+margin-bottom:20px;
+}
+
+label{
+display:block;
+margin-bottom:8px;
+font-weight:bold;
+}
+
+input,
+textarea,
+select{
+width:100%;
+padding:14px;
+border:none;
+border-radius:10px;
+background:#1a3552;
+color:white;
+}
+
+textarea{
+min-height:140px;
+resize:vertical;
+}
+
+.btn{
+width:100%;
+padding:16px;
+background:#f4b400;
+color:#081626;
+border:none;
+border-radius:10px;
+font-weight:bold;
+cursor:pointer;
+font-size:16px;
+}
+
+.btn:hover{
+opacity:.9;
+}
+
+</style>
+</head>
+
+<body>
+
+<header>
+
+<div class="logo">
+
+<div class="logo-box">
+BA
+</div>
+
+<div>
+<b>BIDS.AZ</b><br>
+<small>Create Listing</small>
+</div>
+
+</div>
+
+</header>
+
+<div class="container">
+
+<div class="card">
+
+<h1>Создать объявление</h1>
+
+<div class="form-group">
+<label>Название бизнеса</label>
+<input id="title" type="text">
+</div>
+
+<div class="form-group">
+<label>Цена</label>
+<input id="price" type="number">
+</div>
+
+<div class="form-group">
+<label>Город</label>
+<input id="city" type="text">
+</div>
+
+<div class="form-group">
+<label>Описание</label>
+<textarea id="description"></textarea>
+</div>
+
+<div class="form-group">
+<label>Фотография</label>
+<input id="photo" type="file">
+</div>
+
+<button class="btn" onclick="publishListing()">
+Опубликовать объявление
+</button>
+
+</div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+<script src="supabase.js"></script>
+
+<script>
+
+async function publishListing(){
+
+alert('Форма готова. Подключим сохранение следующим шагом.');
+
+}
+
+</script>
+
+</body>
+</html>
