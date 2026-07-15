@@ -172,8 +172,36 @@ BA
 
 async function publishListing(){
 
-alert('Форма готова. Подключим сохранение следующим шагом.');
+const title =
+document.getElementById('title').value;
 
+const price =
+Number(document.getElementById('price').value);
+
+const city =
+document.getElementById('city').value;
+
+const description =
+document.getElementById('description').value;
+
+const photo =
+document.getElementById('photo').files[0];
+
+const fileName =
+Date.now() + "_" + photo.name;
+
+const { error: uploadError } =
+await supabaseClient.storage
+.from("listing-images")
+.upload(fileName, photo);
+
+if(uploadError){
+    alert("Ошибка загрузки фотографии");
+    console.log(uploadError);
+    return;
+}
+
+alert("Фотография успешно загружена.");
 }
 
 </script>
